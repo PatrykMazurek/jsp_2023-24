@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BoardGame {
+public class BoardGame implements Serializable{
 
     private String title;
     private int year;
@@ -55,6 +55,11 @@ public class BoardGame {
     }
 
     public List<BoardGame> loadFromFile(String path) throws IOException {
+
+// 		Przykład odczytywania pliku z katalogu resource
+//        InputStream in = ClassLoader.getSystemResourceAsStream(path);
+//        InputStreamReader inR = new InputStreamReader(in, StandardCharsets.UTF_8);
+//        BufferedReader buff = new BufferedReader(inR);
 
         BufferedReader buff = new BufferedReader(new FileReader(path, StandardCharsets.UTF_8));
         String line;
