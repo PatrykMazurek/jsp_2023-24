@@ -1,6 +1,7 @@
 package uken.testThread;
 
 import java.util.Random;
+import java.util.concurrent.*;
 
 public class TestThread {
 
@@ -43,6 +44,26 @@ public class TestThread {
             // jeżeli wymagana jest oczekiwanie na zakończenie pracy
             th1.join();
         } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // przykład wykorzystania wątków Callable
+
+        Callable<Integer> callable = () -> {
+            Random random = new Random();
+            int number = random.nextInt(1000);
+//            System.out.println("Wątek: " + Thread.currentThread().getName() + " wylosowł " + number);
+            Thread.sleep(number + 300);
+            return number;
+        };
+
+        FutureTask<Integer> futureTask = new FutureTask<>(callable);
+        Thread th3 = new Thread(futureTask);
+        th3.start();
+        // przekazywanie wartości z wątka dodatkowego do wątka głównego
+        try{
+            int result = futureTask.get(1, TimeUnit.SECONDS);
+        } catch (ExecutionException | InterruptedException | TimeoutException e) {
             throw new RuntimeException(e);
         }
 
