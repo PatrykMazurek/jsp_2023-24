@@ -49,6 +49,10 @@ public class AppServer implements Runnable{
                     case "e":
                         output.println("Bye!");
                         work = false;
+                    default:
+                        output.println("nie ma takiej opcji");
+                        System.out.println("błędna opcja");
+                        break;
                 }
             }
             System.out.println("Zakończenie połączenia z klientem "
